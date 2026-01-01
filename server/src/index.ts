@@ -830,7 +830,9 @@ const PORT = parseInt(
 );
 const HOST = process.env.HOST || "localhost";
 
-const server = app.listen(PORT, HOST);
+// const server = app.listen(PORT, HOST);
+const server = app.listen(PORT, "0.0.0.0");
+
 server.on("listening", () => {
   console.log(`⚙️ Proxy server listening on ${HOST}:${PORT}`);
   if (!authDisabled) {
