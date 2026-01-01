@@ -51,9 +51,12 @@ const options = {
   env: { type: "string", default: "" },
   args: { type: "string", default: "" },
   command: { type: "string", default: "" },
-  transport: { type: "string", default: "" },
+  transport: { type: "string", default: "stdio" },
   "server-url": { type: "string", default: "" },
+  host: { type: "string", default: "127.0.0.1" },
+  port: { type: "string", default: "6274" },
 } as const;
+
 
 const argv = process.argv.slice(2);
 const sepIndex = argv.indexOf("--");
@@ -70,7 +73,7 @@ const parsed = parseArgs({
   strict: true,
 });
 
-const { values } = parsed;
+const { values } = parseArgs({ options });
 
 /**
  * Helper function to detect 401 Unauthorized errors from various transport types.
