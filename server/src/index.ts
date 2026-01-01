@@ -78,7 +78,11 @@ const parsed = parseArgs({
   strict: true,
 });
 
-const { values } = parseArgs({ options });
+const { values, positionals } = parseArgs({
+  options,
+  allowPositionals: true,
+});
+
 
 /**
  * Helper function to detect 401 Unauthorized errors from various transport types.
