@@ -36,16 +36,41 @@ const defaultEnvironment = {
   ...(process.env.MCP_ENV_VARS ? JSON.parse(process.env.MCP_ENV_VARS) : {}),
 };
 
-const { values } = parseArgs({
-  args: process.argv.slice(2),
-  options: {
-    env: { type: "string", default: "" },
-    args: { type: "string", default: "" },
-    command: { type: "string", default: "" },
-    transport: { type: "string", default: "" },
-    "server-url": { type: "string", default: "" },
-  },
+// const { values } = parseArgs({
+//   args: process.argv.slice(2),
+//   options: {
+//     env: { type: "string", default: "" },
+//     args: { type: "string", default: "" },
+//     command: { type: "string", default: "" },
+//     transport: { type: "string", default: "" },
+//     "server-url": { type: "string", default: "" },
+//   },
+// });
+
+const options = {
+  env: { type: "string", default: "" },
+  args: { type: "string", default: "" },
+  command: { type: "string", default: "" },
+  transport: { type: "string", default: "" },
+  "server-url": { type: "string", default: "" },
+};
+
+const argv = process.argv.slice(2);
+const sepIndex = argv.indexOf("--");
+
+const inspectorArgs =
+sepIndex >= 0 ? argv.slice(0, sepIndex) : argv;
+
+const serverArgs =
+sepIndex >= 0 ? argv.slice(sepIndex + 1) : [];
+
+const parsed = parseArgs({
+  args: inspectorArgs,
+  options,
+  strict: true,
 });
+
+const { values } = parsed;
 
 /**
  * Helper function to detect 401 Unauthorized errors from various transport types.
