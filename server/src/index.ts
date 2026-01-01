@@ -53,7 +53,7 @@ const options = {
   command: { type: "string", default: "" },
   transport: { type: "string", default: "" },
   "server-url": { type: "string", default: "" },
-};
+} as const;
 
 const argv = process.argv.slice(2);
 const sepIndex = argv.indexOf("--");
