@@ -53,9 +53,14 @@ const options = {
   command: { type: "string", default: "" },
   transport: { type: "string", default: "stdio" },
   "server-url": { type: "string", default: "" },
+
   host: { type: "string", default: "127.0.0.1" },
   port: { type: "string", default: "6274" },
+
+  "proxy-host": { type: "string", default: "127.0.0.1" },
+  "proxy-port": { type: "string", default: "6277" },
 } as const;
+
 
 
 const argv = process.argv.slice(2);
